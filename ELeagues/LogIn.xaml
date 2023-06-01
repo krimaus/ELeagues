@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ELeagues"
         mc:Ignorable="d"
         Title="ELeagues" Height="400" Width="600">
-    <Grid Background="#FF31353C">
+    <Grid Background="#FF31353C"> 
         <TextBlock HorizontalAlignment="Center" FontFamily="Georgia" FontStyle="Oblique"  FontSize="20" Margin="0,33,0,0" TextWrapping="Wrap" Text="Logowanie" VerticalAlignment="Top" Width="113" Height="46" Background="#FF31353C" Foreground="White"/>
 
         <TextBox HorizontalAlignment="Left" FontFamily="Georgia" Margin="237,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FFA3AEC2" Background="#FF31353C" Foreground="White" FontSize="16"/>
