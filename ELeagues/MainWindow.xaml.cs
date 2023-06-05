@@ -23,64 +23,12 @@ namespace ELeagues
     /// </summary>
     public partial class MainWindow : Window
     {
-        static byte rF = 69;
-        static byte gF = 73;
-        static byte bF = 80;
-
-        static byte rB = 49;
-        static byte gB = 53;
-        static byte bB = 60;
-
-        private Brush brushF = new SolidColorBrush(Color.FromRgb(rF, gF, bF));
-        private Brush brushB = new SolidColorBrush(Color.FromRgb(rB, gB, bB));
-
-        private void Focus1(object sender, RoutedEventArgs e)
-        {
-            btn1.Background = brushF;
-        }
-
-        private void Blur1(object sender, RoutedEventArgs e)
-        {
-            btn1.Background = brushB;
-        }
-
-        private void Focus2(object sender, RoutedEventArgs e)
-        {
-            btn2.Background = brushF;
-        }
-
-        private void Blur2(object sender, RoutedEventArgs e)
-        {
-            btn2.Background = brushB;
-        }
-
-        private void Focus3(object sender, RoutedEventArgs e)
-        {
-            btn3.Background = brushF;
-        }
-
-        private void Blur3(object sender, RoutedEventArgs e)
-        {
-            btn3.Background = brushB;
-        }
-
-        private void Focus4(object sender, RoutedEventArgs e)
-        {
-            btn4.Background = brushF;
-        }
-
-        private void Blur4(object sender, RoutedEventArgs e)
-        {
-            btn4.Background = brushB;
-        }
-
-
 
         public MainWindow()
         {
             
 
-            var conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ConnectionString);
+            /*var conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ConnectionString);
             conn.Open();
 
             using (var cmd = new NpgsqlCommand("SELECT version();", conn))
@@ -90,7 +38,7 @@ namespace ELeagues
                 {
                     Trace.WriteLine(reader.GetString(0));
                 }
-            }
+            }*/
 
             //zamiast bawic sie z licznikami w sql robic to po stronie aplikacji???
             //wykrywac pierwsze nieuzyte id i przypisywac
@@ -113,7 +61,7 @@ namespace ELeagues
                 }
             }
             */
-            var dataSource = NpgsqlDataSource.Create(ConfigurationManager.ConnectionStrings["Conn"].ConnectionString);
+            /*var dataSource = NpgsqlDataSource.Create(ConfigurationManager.ConnectionStrings["Conn"].ConnectionString);
 
             using (var cmd = dataSource.CreateCommand("SELECT * FROM eleagues"))
             using (var reader = cmd.ExecuteReader())
@@ -122,9 +70,11 @@ namespace ELeagues
                 {
                     Console.WriteLine(reader.GetString(0));
                 }
-            }
+            }*/
 
             InitializeComponent();
         }
+
+        
     }
 }

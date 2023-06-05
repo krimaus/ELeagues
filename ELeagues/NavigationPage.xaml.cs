@@ -16,13 +16,19 @@ using System.Windows.Shapes;
 namespace ELeagues
 {
     /// <summary>
-    /// Logika interakcji dla klasy LogOn.xaml
+    /// Logika interakcji dla klasy NavigationPage.xaml
     /// </summary>
-    public partial class LogOn : Page
+    public partial class NavigationPage : Page
     {
-        public LogOn()
+        public NavigationPage()
         {
             InitializeComponent();
+        }
+
+        private void Grid_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedBtn = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedBtn.NavUri);
         }
     }
 }

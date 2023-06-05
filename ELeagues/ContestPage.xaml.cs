@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ELeagues
 {
     /// <summary>
-    /// Logika interakcji dla klasy LogOn.xaml
+    /// Logika interakcji dla klasy ContestPage.xaml
     /// </summary>
-    public partial class LogOn : Page
+    public partial class ContestPage : Page
     {
-        public LogOn()
+        public ContestPage()
         {
             InitializeComponent();
         }
