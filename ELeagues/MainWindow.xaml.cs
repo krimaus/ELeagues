@@ -23,9 +23,12 @@ namespace ELeagues
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
-            var conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ConnectionString);
+            
+
+            /*var conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ConnectionString);
             conn.Open();
 
             using (var cmd = new NpgsqlCommand("SELECT version();", conn))
@@ -35,7 +38,7 @@ namespace ELeagues
                 {
                     Trace.WriteLine(reader.GetString(0));
                 }
-            }
+            }*/
 
             //zamiast bawic sie z licznikami w sql robic to po stronie aplikacji???
             //wykrywac pierwsze nieuzyte id i przypisywac
@@ -58,7 +61,7 @@ namespace ELeagues
                 }
             }
             */
-            var dataSource = NpgsqlDataSource.Create(ConfigurationManager.ConnectionStrings["Conn"].ConnectionString);
+            /*var dataSource = NpgsqlDataSource.Create(ConfigurationManager.ConnectionStrings["Conn"].ConnectionString);
 
             using (var cmd = dataSource.CreateCommand("SELECT * FROM eleagues"))
             using (var reader = cmd.ExecuteReader())
@@ -67,9 +70,11 @@ namespace ELeagues
                 {
                     Console.WriteLine(reader.GetString(0));
                 }
-            }
+            }*/
 
             InitializeComponent();
         }
+
+        
     }
 }
