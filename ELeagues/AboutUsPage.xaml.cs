@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace ELeagues
 {
     /// <summary>
-    /// Logika interakcji dla klasy CreateEditContestLeaguePage.xaml
+    /// Logika interakcji dla klasy AboutUsPage.xaml
     /// </summary>
-    public partial class CreateEditContestLeaguePage : Page
+    public partial class AboutUsPage : Page
     {
-        public CreateEditContestLeaguePage()
+        public AboutUsPage()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }

@@ -14,7 +14,7 @@
             <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,84,0,135">
                 <navigation:NavButton Text="Logowanie" Foreground="White" FontFamily="Georgia" FontSize="16" NavUri="LogIn.xaml"/>
                 <navigation:NavButton Text="Rejestracja" Foreground="White" FontFamily="Georgia" FontSize="16" NavUri="LogOn.xaml"/>
-                <navigation:NavButton Text="O nas" Foreground="White" FontFamily="Georgia" FontSize="16"/>
+                <navigation:NavButton Text="O nas" Foreground="White" FontFamily="Georgia" FontSize="16" NavUri="AboutUsPage.xaml"/>
                 <navigation:NavButton Text="Wyjście" Foreground="White" FontFamily="Georgia" FontSize="16"/>
             </WrapPanel>
 

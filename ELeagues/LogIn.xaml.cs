@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,37 @@ namespace ELeagues
     /// </summary>
     public partial class LogIn : Page
     {
+        public async void save(object sender, RoutedEventArgs e)
+        {
+            string email = "";
+            string pass = "";
+            var conn = "--";
+            //var dataSource = NpgsqlDataSource.Create(conn);
+            // otwarcie połączenia z bazą
+            try
+            {
+                email = e_mail.Text.ToString();
+                pass = password.Text.ToString();
+
+                if (email != "" && pass != "")
+                {
+                    //zapytania do bazy
+                    this.NavigationService.Navigate(new UserPage());
+                    //zamknięcie połączenia
+                }
+                else
+                {
+                    MessageBox.Show("Nieprawidłowe dane, prosze wprowadź ponownie");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Coś poszło nie tak");
+                //zamknięcie połączenia
+            }
+        }
+
         public LogIn()
         {
             InitializeComponent();

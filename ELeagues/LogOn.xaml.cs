@@ -23,37 +23,39 @@ namespace ELeagues
     /// </summary>
     public partial class LogOn : Page
     {
-        public void save(object sender, RoutedEventArgs e)
+        public async void save(object sender, RoutedEventArgs e)
         {
             string email = "";
             string password = "";
             string sec_password = "";
-            var conn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ConnectionString);
+            var conn = "--";
+            //var dataSource = NpgsqlDataSource.Create(conn);
+            //otwarcie połączenia z bazą
 
             try
             {
-                conn.Open();
-
                 email = e_mail.Text.ToString();
                 password = pass.Text.ToString();
                 sec_password = sec_pass.Text.ToString();
 
-                string commandString = "SELECT max(id) FROM Uzyt;";
-                using (var cmd = new NpgsqlCommand(commandString, conn)) 
-                using (var reader = cmd.ExecuteReader())
+                if (password == sec_password && email != "" && sec_password != "")
                 {
-                    while (reader.Read())
-                    {
-                        Trace.WriteLine(reader.GetString(0));
-                    }
-                }
+                    //zapytania do bazy
 
-                conn.Close();
+                    //zamknięcie połączenia z bazą
+                }
+                else
+                {
+                    MessageBox.Show("Nieprawidłowe dane, prosze wprowadź ponownie");
+                }
+                
+
+                //zamknięcie połączenia z bazą
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Coś poszło nie tak");
-                conn.Close();
+                //conn.Close();
             }
         }
 
