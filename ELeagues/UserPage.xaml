@@ -1,14 +1,34 @@
 ﻿<Page x:Class="ELeagues.UserPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
-      xmlns:local="clr-namespace:ELeagues" 
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="UserPage">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="UserPage" Height="450" Width="800">
+    <Grid Background="#FF31353C">
+        <TabControl>
+            <TabItem Header="Strona główna">
+                <StackPanel Background="#FF31353C">
+                    
+                    <Button Click="Back" Content="Wyloguj" Margin="44,51,627,355" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Tworzenie Turnieju">
+                <StackPanel Background="#FF31353C">
+                    <Label Content="Nazwa nowego turnieju" Foreground="white" FontSize="14" Width="335"/>
+                    <TextBox Name="T_name" Width="324"/>
+                    <Label Content="Dodaj graczy" Foreground="white" FontSize="14" Width="335"/>
+                    <Label Content="Dodawanie graczy - po strone C#"  Foreground="white" FontSize="14" Width="335"/>
 
-    <Grid>
-        
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Dodawanie adminów">
+                <StackPanel Background="#FF31353C">
+                    <Label Content="Dodaj do grupy adminów" Foreground="white" FontSize="14" Width="335"/>
+                    <Label Content="Dodawanie adminów - po stronie C#" Foreground="white" FontSize="14" Width="335"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Page>
