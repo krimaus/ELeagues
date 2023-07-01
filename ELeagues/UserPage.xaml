@@ -9,23 +9,25 @@
         <TabControl>
             <TabItem Header="Strona główna">
                 <StackPanel Background="#FF31353C">
+                    <Label Loaded="CheckLogged"  x:Name="hello_user"  Content="" Foreground="white" FontSize="14" Width="335"/>
                     
                     <Button Click="Back" Content="Wyloguj" Margin="44,51,627,355" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Tworzenie Turnieju">
+            <TabItem Header="Tworzenie Turnieju" x:Name="turnieje">
                 <StackPanel Background="#FF31353C">
                     <Label Content="Nazwa nowego turnieju" Foreground="white" FontSize="14" Width="335"/>
-                    <TextBox Name="T_name" Width="324"/>
+                    <TextBox x:Name="nazwaTurnieju" Width="324"/>
                     <Label Content="Dodaj graczy" Foreground="white" FontSize="14" Width="335"/>
-                    <Label Content="Dodawanie graczy - po strone C#"  Foreground="white" FontSize="14" Width="335"/>
+                    <TextBox x:Name="usernameGracza" Width="324"/>
+                    
 
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Dodawanie adminów">
+            <TabItem Header="Dodawanie adminów" x:Name="dodajAdmina">
                 <StackPanel Background="#FF31353C">
                     <Label Content="Dodaj do grupy adminów" Foreground="white" FontSize="14" Width="335"/>
-                    <Label Content="Dodawanie adminów - po stronie C#" Foreground="white" FontSize="14" Width="335"/>
+                    
                 </StackPanel>
             </TabItem>
         </TabControl>
