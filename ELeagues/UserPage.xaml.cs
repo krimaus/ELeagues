@@ -26,6 +26,21 @@ namespace ELeagues
             this.NavigationService.Navigate(new NavigationPage());
         }
 
+        public void CheckLogged(object sender, RoutedEventArgs e)
+        {
+            string helloMsg = "Witaj"; //+ username + \n +"Najblizsze turnieje na ktore jestes zapisany: " +info na jakie jest zapisane turnieje\n
+            string turniejeAll = "erer"; //select na wszystkie turnieje
+            hello_user.Content = helloMsg + "\n" + turniejeAll;
+
+            //jezeli admin
+            turnieje.Visibility = Visibility.Visible;
+            dodajAdmina.Visibility = Visibility.Visible;
+
+            //jezeli zwykly user
+            turnieje.Visibility = Visibility.Hidden;
+            dodajAdmina.Visibility = Visibility.Hidden;
+        }
+
         public UserPage()
         {
             InitializeComponent();
