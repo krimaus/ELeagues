@@ -32,7 +32,7 @@ namespace ELeagues
                 email = e_mail.Text.ToString();
                 pass = password.Text.ToString();
 
-                if (email != "" && pass != "")
+                if (Check(email, pass))
                 {
                     //zapytania do bazy
                     this.NavigationService.Navigate(new UserPage());
@@ -49,6 +49,12 @@ namespace ELeagues
                 MessageBox.Show("Coś poszło nie tak");
                 //zamknięcie połączenia
             }
+        }
+
+        public bool Check(string s1, string s2)
+        {
+            if (s1 != "" && s2 != "") return true;
+            else return false;
         }
 
         public LogIn()
