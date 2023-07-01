@@ -16,11 +16,15 @@
             </TabItem>
             <TabItem Header="Tworzenie Turnieju" x:Name="turnieje">
                 <StackPanel Background="#FF31353C">
-                    <Label Content="Nazwa nowego turnieju" Foreground="white" FontSize="14" Width="335"/>
+                    <Label Content="Nazwa nowego turnieju" Foreground="white" FontSize="14" Width="161"/>
                     <TextBox x:Name="nazwaTurnieju" Width="324"/>
-                    <Label Content="Dodaj graczy" Foreground="white" FontSize="14" Width="335"/>
+                    <Label Content="Ilosc rund" Foreground="white" FontSize="14" Width="71"/>
+                    <TextBox KeyDown="CheckRounds"  x:Name="iloscRund"  Width="50"/>
+                    <Label Content="Dodaj graczy" Foreground="white" FontSize="14" Width="100"/>
                     <TextBox x:Name="usernameGracza" Width="324"/>
-                    
+                    <Button Content="Dodaj" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
+                    <Button Click="SaveTournament"  x:Name="save_button" Visibility="Hidden" Content="Zapisz" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
+                    <Label Content="" x:Name="test" Foreground="white"/>
 
                 </StackPanel>
             </TabItem>

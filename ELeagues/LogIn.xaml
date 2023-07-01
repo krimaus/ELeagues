@@ -9,8 +9,8 @@
     <Grid Background="#FF31353C">
         <TextBlock HorizontalAlignment="Center" FontFamily="Georgia" FontStyle="Oblique"  FontSize="20" Margin="0,33,0,0" TextWrapping="Wrap" Text="Logowanie" VerticalAlignment="Top" Width="113" Height="46" Background="#FF31353C" Foreground="White"/>
 
-        <TextBox Name="e_mail"  HorizontalAlignment="Center" FontFamily="Georgia" Margin="0,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FFA3AEC2" Background="#FF31353C" Foreground="White" FontSize="16"/>
-        <Label Content="E-mail" HorizontalAlignment="Left" Margin="233,114,0,0" VerticalAlignment="Top" Width="58" Foreground="White"/>
+        <TextBox Name="username"  HorizontalAlignment="Center" FontFamily="Georgia" Margin="0,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FFA3AEC2" Background="#FF31353C" Foreground="White" FontSize="16"/>
+        <Label Content="Nazwa użytkownika" HorizontalAlignment="Left" Margin="172,114,0,0" VerticalAlignment="Top" Width="119" Foreground="White"/>
         <TextBox Name="password" HorizontalAlignment="Center" FontFamily="Georgia" Margin="0,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FFA3AEC2" Background="#FF31353C" Foreground="White" FontSize="16"/>
         <Label Content="Hasło" HorizontalAlignment="Left" Margin="233,169,0,0" VerticalAlignment="Top" Width="58" Foreground="White" RenderTransformOrigin="0.707,-0.054"/>
         <Button Click="save" Content="Zaloguj" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.621,-0.661" Height="40" Width="136" Background="#FF31353C" BorderBrush="#FF31353C" Foreground="White"/>

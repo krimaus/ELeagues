@@ -22,21 +22,21 @@ namespace ELeagues
     {
         public async void save(object sender, RoutedEventArgs e)
         {
-            string email = "";
+            string user = "";
             string pass = "";
             bool serverReply;
             try
             {
-                email = e_mail.Text.ToString();
+                user = username.Text.ToString();
                 pass = password.Text.ToString();
 
-                if (Check(email, pass))
+                if (Check(user, pass))
                 {
                     //komunikacja z serwerem
-                    serverReply = ServerComm.ServerCall("lc:"+email+":"+pass);
+                    serverReply = ServerComm.ServerCall("lc:"+ user + ":"+pass);
                     if (serverReply)
                     {
-                        ServerComm.CurrentUser = email;
+                        ServerComm.CurrentUser = user;
                         this.NavigationService.Navigate(new UserPage());
                     }
                     else MessageBox.Show("Błąd, sprawdź dane i spróbuj ponownie");
@@ -50,7 +50,6 @@ namespace ELeagues
             catch (Exception)
             {
                 MessageBox.Show("Coś poszło nie tak");
-                //zamknięcie połączenia
             }
         }
 
