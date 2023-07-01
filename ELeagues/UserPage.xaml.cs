@@ -23,6 +23,8 @@ namespace ELeagues
     {
         public void Back(object sender, RoutedEventArgs e)
         {
+            // zakładam że tutaj powinno być wylogowanie więc tu je wpisuje
+            ServerComm.CurrentUser = null;
             this.NavigationService.Navigate(new NavigationPage());
         }
 

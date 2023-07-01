@@ -7,6 +7,22 @@ namespace ELeagues
 {
 	class ServerComm
 	{
+
+        // Use ServerComm.CurrentUser as you would any other variable name,
+        // null value means no user is logged in so one should set null value when user logs out
+        static string? _globalString;
+        public static string? CurrentUser 
+        {
+            get
+            {
+                return _globalString;
+            }
+            set
+            {
+                _globalString = value;
+            }
+        }
+
         public static bool ServerCall(string messageToServer)
         {
 

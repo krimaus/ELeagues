@@ -34,7 +34,11 @@ namespace ELeagues
                 {
                     //komunikacja z serwerem
                     serverReply = ServerComm.ServerCall("lc:"+email+":"+pass);
-                    if(serverReply) this.NavigationService.Navigate(new UserPage());
+                    if (serverReply)
+                    {
+                        ServerComm.CurrentUser = email;
+                        this.NavigationService.Navigate(new UserPage());
+                    }
                     else MessageBox.Show("Błąd, sprawdź dane i spróbuj ponownie");
                 }
                 else
