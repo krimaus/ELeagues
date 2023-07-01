@@ -30,7 +30,7 @@ namespace ELeagues
 
         public void CheckLogged(object sender, RoutedEventArgs e)
         {
-            string helloMsg = "Witaj"; //+ username + \n +"Najblizsze turnieje na ktore jestes zapisany: " +info na jakie jest zapisane turnieje\n
+            string helloMsg = "Witaj" + ServerComm.CurrentUser; // + \n +"Najblizsze turnieje na ktore jestes zapisany: " +info na jakie jest zapisane turnieje\n
             string turniejeAll = "erer"; //select na wszystkie turnieje
             hello_user.Content = helloMsg + "\n" + turniejeAll;
 
