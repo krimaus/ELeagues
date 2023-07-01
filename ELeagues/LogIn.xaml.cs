@@ -24,9 +24,7 @@ namespace ELeagues
         {
             string email = "";
             string pass = "";
-            var conn = "--";
-            //var dataSource = NpgsqlDataSource.Create(conn);
-            // otwarcie połączenia z bazą
+            bool serverReply;
             try
             {
                 email = e_mail.Text.ToString();
@@ -34,9 +32,10 @@ namespace ELeagues
 
                 if (Check(email, pass))
                 {
-                    //zapytania do bazy
-                    this.NavigationService.Navigate(new UserPage());
-                    //zamknięcie połączenia
+                    //komunikacja z serwerem
+                    serverReply = ServerComm.ServerCall("lc:"+email+":"+pass);
+                    if(serverReply) this.NavigationService.Navigate(new UserPage());
+                    else MessageBox.Show("Błąd, sprawdź dane i spróbuj ponownie");
                 }
                 else
                 {
@@ -44,7 +43,7 @@ namespace ELeagues
                 }
                 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Coś poszło nie tak");
                 //zamknięcie połączenia
