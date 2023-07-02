@@ -32,7 +32,7 @@ namespace ELeagues
                 if (Check(user, pass))
                 {
                     //komunikacja z serwerem
-                    if (ServerComm.ServerCall("lc:" + user + ":" + pass))
+                    if (ServerComm.ServerCall("sq:logincheck:" + user + ":" + pass))
                     {
                         ServerComm.CurrentUser = user;
                         if (ServerComm.ServerCall("sq:isadmin:" + user)) ServerComm.AdminStatus = true;

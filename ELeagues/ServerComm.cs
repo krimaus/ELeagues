@@ -69,8 +69,7 @@ namespace ELeagues
 
                     // Creation of message that
                     // we will send to Server
-                    // message template lc:username:password
-                    // lc - login call
+                    // message template ca:username:password:false
                     // ca - create account
                     // cl - create league
                     // ct - create tourney
