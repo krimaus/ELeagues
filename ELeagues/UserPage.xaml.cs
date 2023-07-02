@@ -39,15 +39,19 @@ namespace ELeagues
             string turniejeAll = ""; //select na wszystkie turnieje, postaram sie zrobic z tego przewijalna tabele
             hello_user.Content = helloMsg + "\n" + turniejeAll;
 
-            //jezeli admin
-            turnieje.Visibility = Visibility.Visible;
-            dodajAdmina.Visibility = Visibility.Visible;
-
-            //jezeli zwykly user
-            turnieje.Visibility = Visibility.Hidden;
-            dodajAdmina.Visibility = Visibility.Hidden;
-
             
+            if (ServerComm.AdminStatus)
+            {
+                //jezeli admin
+                turnieje.Visibility = Visibility.Visible;
+                dodajAdmina.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                //jezeli zwykly user
+                turnieje.Visibility = Visibility.Hidden;
+                dodajAdmina.Visibility = Visibility.Hidden;
+            }
         }
 
         public void AddPlayer(object sender, RoutedEventArgs e)

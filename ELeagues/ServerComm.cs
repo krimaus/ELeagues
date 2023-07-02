@@ -36,7 +36,7 @@ namespace ELeagues
             }
         }
 
-        public static bool ServerCall(string messageToServer)
+        public static string[] ServerCall(string messageToServer)
         {
 
             try
@@ -64,12 +64,11 @@ namespace ELeagues
 
                     // We print EndPoint information
                     // that we are connected
-                    Console.WriteLine("Socket connected to -> {0} ",
-                                  sender.RemoteEndPoint.ToString());
+                    //Console.WriteLine("Socket connected to -> {0} ", sender.RemoteEndPoint.ToString());
 
                     // Creation of message that
                     // we will send to Server
-                    // message template ca:username:password:false
+                    // message template ca:username:password:(false/true)
                     // ca - create account
                     // cl - create league
                     // ct - create tourney
@@ -89,9 +88,7 @@ namespace ELeagues
                     // received, that we'll use to
                     // convert them to string
                     int byteRecv = sender.Receive(messageReceived);
-                    Console.WriteLine("Message from Server -> {0}",
-                          Encoding.ASCII.GetString(messageReceived,
-                                                     0, byteRecv));
+                    //Console.WriteLine("Message from Server -> {0}", Encoding.ASCII.GetString(messageReceived, 0, byteRecv));
 
                     // Close Socket using
                     // the Close() method
@@ -99,39 +96,38 @@ namespace ELeagues
                     sender.Close();
 
                     //sr - server reply
-                    if (Encoding.ASCII.GetString(messageReceived, 0, byteRecv) == "sr:approved")
-                        return true;
-                    else
-                        return false;
+                    return Encoding.ASCII.GetString(messageReceived, 0, byteRecv).Split(":");
                 }
 
                 // Manage Socket's Exceptions
                 catch (ArgumentNullException ane)
                 {
-
                     Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
-                    return false;
+                    string[] reply = { "sr:disapproved" };
+                    return reply;
                 }
 
                 catch (SocketException se)
                 {
 
                     Console.WriteLine("SocketException : {0}", se.ToString());
-                    return false;
+                    string[] reply = { "sr:disapproved" };
+                    return reply;
                 }
 
                 catch (Exception e)
                 {
                     Console.WriteLine("Unexpected exception : {0}", e.ToString());
-                    return false;
+                    string[] reply = { "sr:disapproved" };
+                    return reply;
                 }
             }
 
             catch (Exception e)
             {
-
                 Console.WriteLine(e.ToString());
-                return false;
+                string[] reply = { "sr:disapproved" };
+                return reply;
             }
         }
     }

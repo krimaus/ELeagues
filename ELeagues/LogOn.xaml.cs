@@ -28,7 +28,7 @@ namespace ELeagues
             string email = "";
             string password = "";
             string sec_password = "";
-            bool serverReply;
+            string[] serverDenial = { "sr", "disapproved" };
 
             try
             {
@@ -38,8 +38,11 @@ namespace ELeagues
 
                 if (password == sec_password && email != "" && sec_password != "")
                 {
-                    serverReply = ServerComm.ServerCall("ca:" + email + ":" + password + ":" + "false");
-                    if (!serverReply) MessageBox.Show("Błąd, sprawdź dane i spróbuj poniwnie");
+                    //potrzeba czegoś do ustalenia czy tworzone konto jest adminem
+                    if (ServerComm.ServerCall("ca:" + email + ":" + password + ":" + "false") == serverDenial)
+                        MessageBox.Show("Błąd, sprawdź dane i spróbuj poniwnie");
+                    else
+                        MessageBox.Show("Pomyślnie utworzono konto");
                 }
                 else
                 {

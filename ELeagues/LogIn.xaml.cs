@@ -24,6 +24,7 @@ namespace ELeagues
         {
             string user = "";
             string pass = "";
+            string[] serverAccept = { "sr", "approved" };
             try
             {
                 user = username.Text.ToString();
@@ -32,10 +33,10 @@ namespace ELeagues
                 if (Check(user, pass))
                 {
                     //komunikacja z serwerem
-                    if (ServerComm.ServerCall("sq:logincheck:" + user + ":" + pass))
+                    if (ServerComm.ServerCall("sq:logincheck:" + user + ":" + pass) == serverAccept)
                     {
                         ServerComm.CurrentUser = user;
-                        if (ServerComm.ServerCall("sq:isadmin:" + user)) ServerComm.AdminStatus = true;
+                        if (ServerComm.ServerCall("sq:isadmin:" + user) == serverAccept) ServerComm.AdminStatus = true;
                         this.NavigationService.Navigate(new UserPage());
                     }
                     else MessageBox.Show("Błąd, sprawdź dane i spróbuj ponownie");
