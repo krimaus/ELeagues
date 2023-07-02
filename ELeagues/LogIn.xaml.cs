@@ -24,7 +24,6 @@ namespace ELeagues
         {
             string user = "";
             string pass = "";
-            bool serverReply;
             try
             {
                 user = username.Text.ToString();
@@ -33,10 +32,10 @@ namespace ELeagues
                 if (Check(user, pass))
                 {
                     //komunikacja z serwerem
-                    serverReply = ServerComm.ServerCall("lc:"+ user + ":"+pass);
-                    if (serverReply)
+                    if (ServerComm.ServerCall("lc:" + user + ":" + pass))
                     {
                         ServerComm.CurrentUser = user;
+                        if (ServerComm.ServerCall("sq:isadmin:" + user)) ServerComm.AdminStatus = true;
                         this.NavigationService.Navigate(new UserPage());
                     }
                     else MessageBox.Show("Błąd, sprawdź dane i spróbuj ponownie");

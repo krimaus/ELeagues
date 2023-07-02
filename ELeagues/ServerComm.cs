@@ -23,6 +23,19 @@ namespace ELeagues
             }
         }
 
+        static bool _adminStatus = false;
+        public static bool AdminStatus
+        {
+            get
+            {
+                return _adminStatus;
+            }
+            set
+            {
+                _adminStatus = value;
+            }
+        }
+
         public static bool ServerCall(string messageToServer)
         {
 
@@ -64,6 +77,7 @@ namespace ELeagues
                     // ap - add player
                     // cm - create match
                     // em - edit match
+                    // sq - server query
                     byte[] messageSent = Encoding.ASCII.GetBytes(messageToServer + "<EOF>");
                     int byteSent = sender.Send(messageSent);
 
@@ -81,7 +95,7 @@ namespace ELeagues
                                                      0, byteRecv));
 
                     // Close Socket using
-                    // the method Close()
+                    // the Close() method
                     sender.Shutdown(SocketShutdown.Both);
                     sender.Close();
 
@@ -92,7 +106,7 @@ namespace ELeagues
                         return false;
                 }
 
-                // Manage of Socket's Exceptions
+                // Manage Socket's Exceptions
                 catch (ArgumentNullException ane)
                 {
 
