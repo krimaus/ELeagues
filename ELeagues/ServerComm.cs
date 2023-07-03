@@ -103,7 +103,7 @@ namespace ELeagues
                 catch (ArgumentNullException ane)
                 {
                     Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
-                    string[] reply = { "sr:disapproved" };
+                    string[] reply = { "sr", "disapproved" };
                     return reply;
                 }
 
@@ -111,14 +111,14 @@ namespace ELeagues
                 {
 
                     Console.WriteLine("SocketException : {0}", se.ToString());
-                    string[] reply = { "sr:disapproved" };
+                    string[] reply = { "sr", "disapproved" };
                     return reply;
                 }
 
                 catch (Exception e)
                 {
                     Console.WriteLine("Unexpected exception : {0}", e.ToString());
-                    string[] reply = { "sr:disapproved" };
+                    string[] reply = { "sr", "disapproved" };
                     return reply;
                 }
             }
@@ -126,7 +126,7 @@ namespace ELeagues
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                string[] reply = { "sr:disapproved" };
+                string[] reply = { "sr", "disapproved" };
                 return reply;
             }
         }

@@ -41,7 +41,7 @@ namespace ELeagues
                 if (Check(email, password, sec_password))
                 {
                     //potrzeba czegoś do ustalenia czy tworzone konto jest adminem
-                    if (ServerComm.ServerCall("ca:" + email + ":" + password + ":" + toAdmin) == serverDenial)
+                    if (ServerComm.ServerCall("ca:" + email + ":" + password + ":" + "false") == serverDenial)
                         MessageBox.Show("Błąd, sprawdź dane i spróbuj poniwnie");
                     else
                         MessageBox.Show("Pomyślnie utworzono konto");
