@@ -72,7 +72,6 @@ namespace ELeagues
                     // ca - create account
                     // cl - create league
                     // ct - create tourney
-                    // ap - add player
                     // cm - create match
                     // em - edit match
                     // sq - server query

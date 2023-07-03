@@ -42,7 +42,7 @@ namespace ELeagues
         {
             ServerComm.AdminStatus = true;
             string helloMsg = "Witaj, " + ServerComm.CurrentUser + "\n" + "Turnieje do których jesteś zapisany/a:\n"; // + \n +"Najblizsze turnieje na ktore jestes zapisany: "
-            // info na jakie jest zapisane turnieje\n
+            // info na jakie jest zapisane turnieje 
             foreach (string turneyName in ServerComm.ServerCall("sq:mytourneys:"+ServerComm.CurrentUser))
             {
                 if (turneyName != "sr") helloMsg += turneyName + "\n";
