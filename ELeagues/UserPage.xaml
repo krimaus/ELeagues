@@ -8,33 +8,49 @@
     <Grid Background="#FF31353C">
         <TabControl>
             <TabItem Header="Strona główna">
-                <StackPanel Background="#FF31353C">
+                <StackPanel Background="#FF31353C" Height="433" Margin="-2,-2,-2,-2">
                     <Label Loaded="CheckLogged"  x:Name="hello_user"  Content="" Foreground="white" FontSize="14" Width="335"/>
                     
                     <Button Click="Back" Content="Wyloguj" Margin="44,51,627,355" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Tworzenie Turnieju" x:Name="turnieje">
-                <StackPanel Background="#FF31353C">
-                    <Label Content="Nazwa nowego turnieju" Foreground="white" FontSize="14" Width="161"/>
-                    <TextBox x:Name="nazwaTurnieju" Width="324"/>
-                    <Label Content="Ilosc rund" Foreground="white" FontSize="14" Width="71"/>
-                    <TextBox KeyDown="CheckRounds"  x:Name="iloscRund"  Width="50"/>
+            <TabItem Header="Tworzenie Turnieju i ligi" x:Name="turnieje">
+                <StackPanel Background="#FF31353C"  Margin="-2,-2,-2,-2">
+                    <Label  Content="Ilosc rund" Foreground="white" FontSize="14" Width="71"/>
+                    <TextBox TextChanged="CheckRounds"  Name="iloscRund"  Width="50"/>
                     <Label Content="Dodaj graczy" Foreground="white" FontSize="14" Width="100"/>
                     <TextBox x:Name="usernameGracza" Width="324"/>
-                    <Button Content="Dodaj" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
+                    <Button Click="AddPlayer" Content="Dodaj" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
+                    <Button  Click="ShowAllPlayers" Content="Pokaż wszystkich graczy" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50" Width="793"/>
                     <Button Click="SaveTournament"  x:Name="save_button" Visibility="Hidden" Content="Zapisz" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
-                    <Label Content="" x:Name="test" Foreground="white"/>
+                    <Label  Visibility="Hidden" Content="Czy stworzyć nową ligę turniejów?" Foreground="white" FontSize="14" Width="220"/>
+                    <CheckBox x:Name="add_league"  Foreground="White" Content="Dodaj nową ligę" Height="38" Width="124"/>
+
 
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Dodawanie adminów" x:Name="dodajAdmina">
-                <StackPanel Background="#FF31353C">
-                    <Label Content="Dodaj do grupy adminów" Foreground="white" FontSize="14" Width="335"/>
+            <TabItem Header="Edytuj mecze" x:Name="editMatch" Height="20" VerticalAlignment="Top">
+                <StackPanel Background="#FF31353C"  Margin="-2,-2,-2,-2">
+                    <Button Click="ShowMyTournaments"  x:Name="turnieje_ligi" Content="Pokaż moje turnieje" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
+                    <Label Content="Wpisz id meczu do edycji" Foreground="white" FontSize="14" Width="193"/>
+                    <TextBox TextChanged="ShowButtonM"  x:Name="m_id"  Width="100"/>
+                    <Button Visibility="Hidden" x:Name="edit_btns"  Click="ShowEditButtons" Content="Rozpocznij edycję" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
                     
+                    <Label Visibility="Hidden" x:Name="lab_g1"  Content="Gracz 1" Foreground="white" FontSize="14" Width="193"/>
+                    <TextBox Visibility="Hidden" x:Name="gamer1"  Width="100"/>
+                    <Label Visibility="Hidden" x:Name="lab_s1" Content="Wynik gracza 1" Foreground="white" FontSize="14" Width="193"/>
+                    <TextBox Visibility="Hidden" x:Name="score1"  Width="100"/>
+
+                    <Label Visibility="Hidden" x:Name="lab_g2" Content="Gracz 2" Foreground="white" FontSize="14" Width="193"/>
+                    <TextBox Visibility="Hidden" x:Name="gamer2"  Width="100"/>
+                    <Label Visibility="Hidden" x:Name="lab_s2" Content="Wynik gracza 2" Foreground="white" FontSize="14" Width="193"/>
+                    <TextBox Visibility="Hidden" x:Name="score2"  Width="100"/>
+                    
+                    <Button Visibility="Hidden" x:Name="edit"  Click="EditMatch" Content="Edytuj" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="1130,350,0,0" VerticalAlignment="Top" Width="0"/>
 
     </Grid>
 </Page>

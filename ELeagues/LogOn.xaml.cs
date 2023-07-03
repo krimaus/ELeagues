@@ -28,6 +28,7 @@ namespace ELeagues
             string email = "";
             string password = "";
             string sec_password = "";
+            bool toAdmin = false;
             string[] serverDenial = { "sr", "disapproved" };
 
             try
@@ -35,11 +36,12 @@ namespace ELeagues
                 email = e_mail.Text.ToString();
                 password = pass.Text.ToString();
                 sec_password = sec_pass.Text.ToString();
+                if (czy_admin.IsChecked == true) toAdmin = true;
 
-                if (password == sec_password && email != "" && sec_password != "")
+                if (Check(email, password, sec_password))
                 {
                     //potrzeba czegoś do ustalenia czy tworzone konto jest adminem
-                    if (ServerComm.ServerCall("ca:" + email + ":" + password + ":" + "false") == serverDenial)
+                    if (ServerComm.ServerCall("ca:" + email + ":" + password + ":" + toAdmin) == serverDenial)
                         MessageBox.Show("Błąd, sprawdź dane i spróbuj poniwnie");
                     else
                         MessageBox.Show("Pomyślnie utworzono konto");
@@ -54,6 +56,36 @@ namespace ELeagues
             {
                 MessageBox.Show("Coś poszło nie tak");
             }
+        }
+
+        private bool IsNotColon(string s)
+        {
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == ':') return false;
+            }
+            return true;
+        }
+
+        private bool Check(string email, string pass1, string pass2)
+        {
+            if (email != "" && pass1 != "" && pass2 != "")
+            {
+                return (( IsNotColon(email) && IsNotColon(pass1) && IsNotColon(pass2) && CheckPasswords(pass1, pass2)));
+
+            }
+            else return false;
+        }
+
+        private bool CheckPasswords(string s1, string s2)
+        {
+            bool ok = false;
+            for (int i = 0; i < s1.Length; i++)
+            {
+                if (Char.IsUpper(s1, i)) ok = true;
+            }
+
+            return ((s1 == s2) && ok && (s1.Length >= 8));
         }
 
         public LogOn()

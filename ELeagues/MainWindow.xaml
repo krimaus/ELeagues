@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:navigation="clr-namespace:ELeagues"
         mc:Ignorable="d"
-        Title="ELeagues" Height="400" Width="600">
+        Title="ELeagues" Height="400" Width="800">
     <DockPanel>
         <Grid Background="#FF31353C">
             <TextBlock HorizontalAlignment="Center" FontFamily="Georgia" FontStyle="Oblique"  FontSize="20" Margin="0,33,0,0" TextWrapping="Wrap" Text="WITAJ W ELEAGUES!" VerticalAlignment="Top" Width="216" Height="46" Background="#FF31353C" Foreground="White"/>
