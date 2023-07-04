@@ -147,12 +147,18 @@ namespace ELeagues
             
             if (IsNumber(score1.Text.ToString()) && IsNumber(score2.Text.ToString()) && IsNumber((m_id.Text.ToString())))
             {
-                int s1 = int.Parse(score1.Text.ToString()), s2 = int.Parse(score2.Text.ToString());
-                int id = int.Parse(m_id.Text.ToString());
+                string s1 = score1.Text.ToString(), s2 = score2.Text.ToString();
+                string id = m_id.Text.ToString();
+                if (g1 == "") g1 = "empty";
+                if (g2 == "") g2 = "empty";
+                if (s1 == "") s1 = "empty";
+                if (s2 == "") s2 = "empty";
+
 
                 if (g1 != "" && g2 != "" && g1 != g2)
                 {
                     //zapytanie edytujace dany mecz o danym id
+                    ServerComm.ServerCall("em:" + id.ToString() + ":" + g1 + ":" + g2 + ":" + s1 + ":" + s2 + ":empty");
                     gamer1.Text = "";
                     gamer2.Text = "";
                     score1.Text = "";
