@@ -40,7 +40,7 @@ namespace ELeagues
 
         private void CheckLogged(object sender, RoutedEventArgs e)
         {
-            ServerComm.AdminStatus = true;
+            ServerComm.AdminStatus = false;
             string helloMsg = "Witaj, " + ServerComm.CurrentUser + "\n" + "Turnieje do których jesteś zapisany/a:\n"; // + \n +"Najblizsze turnieje na ktore jestes zapisany: "
             // info na jakie jest zapisane turnieje\n
             foreach (string turneyName in ServerComm.ServerCall("sq:mytourneys:"+ServerComm.CurrentUser))
@@ -140,6 +140,12 @@ namespace ELeagues
             return ok;
         }
 
+        private bool IsPowerOfTwo_2(int number)
+        {
+            double log = Math.Log(number, 2);
+            double pow = Math.Pow(2, Math.Round(log));
+            return pow == number;
+        }
 
         private void EditMatch(object sender, RoutedEventArgs e)
         {
@@ -204,7 +210,7 @@ namespace ELeagues
             {
                 rounds = int.Parse(iloscRund.Text.ToString());
 
-                if (rounds % 2 == 0 && rounds != 0)
+                if (IsPowerOfTwo_2(rounds))
                 {
                     playersQuantity = 2 * rounds;
                     playersInList = 2 * rounds;
