@@ -186,14 +186,31 @@ namespace ELeagues
         {
             //zapytania do bazy do tworzenia turnieju i przypisania do tego turnieju uzytkownikow z usersToAdd,
             //najlepiej z wykorzystaniem petli for each
+            string idHolder;
             if (add_league.IsChecked == true)
             {
                 //tworzy najpierw nowa lige, po tym tworzy turniej podpiety pod nowa lige
+                idHolder = ServerComm.ServerCall("cl:" + ServerComm.CurrentUser)[1];
+                idHolder = ServerComm.ServerCall("ct:" + idHolder)[1];
             }
             else
             {
                 //tworzy turniej pod ostatnia lige
+                idHolder = ServerComm.ServerCall(
+                    "ct:" + ServerComm.ServerCall("sq:lastusedleague:" + ServerComm.CurrentUser)[1]
+                    )[1];
             }
+
+            // petla tworząca mecze pierwszej rundy
+            List<string> currentRoundMatchIds = new();
+            for(int i = 0; i<usersToAdd.Count(); i+=2)
+            {
+                currentRoundMatchIds.Add(ServerComm.ServerCall("cm:" + idHolder)[1]);
+            }
+
+            // pętla wypełniająca pierwszą rundę
+
+            // pętla dopisująca resztę meczy i łącząca kolejne rundy
         }
 
         private void CheckRounds(object sender, RoutedEventArgs e)
