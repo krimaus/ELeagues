@@ -41,7 +41,6 @@ namespace ELeagues
 
         private void CheckLogged(object sender, RoutedEventArgs e)
         {
-            ServerComm.AdminStatus = true;
             string helloMsg = "Witaj, " + ServerComm.CurrentUser + "\n" + "Turnieje do których jesteś zapisany/a:\n"; // + \n +"Najblizsze turnieje na ktore jestes zapisany: "
             // info na jakie jest zapisane turnieje 
             foreach (string turneyName in ServerComm.ServerCall("sq:mytourneys:"+ServerComm.CurrentUser))
@@ -119,15 +118,19 @@ namespace ELeagues
         private void ShowAllPlayers(object sender, RoutedEventArgs e)
         {
             string query = "";
-             //select na wszystkich graczy
+            //select na wszystkich graczy
+            var allPlayers = ServerComm.ServerCall("sq:allplayers");
+            foreach(var player in allPlayers)
+            {
+                query += player + "\n";
+            }
             CreateContent(query);
         }
 
-        
-
         private void ShowMyTournaments(object sender, RoutedEventArgs e)
         {
-            string query = ""; //select na turnieje danego gracza, tak zeby bylo widac w tym id ligi i id meczow, posortowane wzgledem id turnieju
+            string query = ""; 
+            //select na turnieje danego gracza, tak zeby bylo widac w tym id ligi i id meczow, posortowane wzgledem id turnieju
             CreateContent(query);
         }
 
@@ -232,22 +235,23 @@ namespace ELeagues
             }
 
             // pętla dopisująca resztę meczy i łącząca kolejne rundy
-            for(i = currentRoundMatchIds.Count(); i>1; i/=2)
+            while(currentRoundMatchIds.Count() != 1)
             {
-                for(j = 0; j<i; j++)
+                for(j = 0; j<currentRoundMatchIds.Count()/2; j++)
                 {
                     matchIdHolder = ServerComm.ServerCall("cm:" + idHolder)[1];
                     ServerComm.ServerCall("em:" + currentRoundMatchIds[j] + ":empty:empty:empty:empty:" + matchIdHolder);
-                    ServerComm.ServerCall("em:" + currentRoundMatchIds[j+1] + ":empty:empty:empty:empty:" + matchIdHolder);
+                    ServerComm.ServerCall("em:" + currentRoundMatchIds[currentRoundMatchIds.Count() - j] + ":empty:empty:empty:empty:" + matchIdHolder);
                     nextRoundMatchIds.Add(matchIdHolder);
                 }
+                currentRoundMatchIds.Clear();
                 currentRoundMatchIds = nextRoundMatchIds;
             }
 
             // finał
-            matchIdHolder = ServerComm.ServerCall("cm:" + idHolder)[1];
-            ServerComm.ServerCall("em:" + currentRoundMatchIds[0] + ":empty:empty:empty:empty:" + matchIdHolder);
-            ServerComm.ServerCall("em:" + currentRoundMatchIds[1] + ":empty:empty:empty:empty:" + matchIdHolder);
+            // matchIdHolder = ServerComm.ServerCall("cm:" + idHolder)[1];
+            // ServerComm.ServerCall("em:" + currentRoundMatchIds[0] + ":empty:empty:empty:empty:" + matchIdHolder);
+            // ServerComm.ServerCall("em:" + currentRoundMatchIds[1] + ":empty:empty:empty:empty:" + matchIdHolder);
 
         }
 
