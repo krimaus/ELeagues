@@ -45,14 +45,14 @@ namespace ELeagues
             // info na jakie jest zapisane turnieje 
             foreach (string turneyName in ServerComm.ServerCall("sq:mytourneys:"+ServerComm.CurrentUser))
             {
-                if (turneyName != "sr") helloMsg += turneyName + "\n";
+                if (turneyName != "sr" && turneyName != "disapproved") helloMsg += turneyName + "\n";
             }
 
             string turniejeAll = ""; 
             //select na wszystkie turnieje, postaram sie zrobic z tego przewijalna tabele
             foreach(string turneyName in ServerComm.ServerCall("sq:alltourneys"))
             {
-                if (turneyName != "sr") turniejeAll += turneyName + "\n";
+                if (turneyName != "sr" && turneyName != "disapproved") turniejeAll += turneyName + "\n";
             }
             
             hello_user.Content = helloMsg + "\n" + turniejeAll;
@@ -79,7 +79,7 @@ namespace ELeagues
             {
                 if (playersQuantity > 0)
                 {
-                    user = usernameGracza.ToString();
+                    user = usernameGracza.Text.ToString(); // Text missing and causing problem?
                     usersToAdd.Add(user);
                     playersQuantity--;
                     usernameGracza.Text = "";
@@ -202,7 +202,7 @@ namespace ELeagues
         {
             //zapytania do bazy do tworzenia turnieju i przypisania do tego turnieju uzytkownikow z usersToAdd,
             //najlepiej z wykorzystaniem petli for each
-            int i,j;
+            int i;
             string idHolder, matchIdHolder;
             List<string> currentRoundMatchIds = new(), nextRoundMatchIds = new();
 
@@ -235,30 +235,25 @@ namespace ELeagues
             }
 
             // pętla wypełniająca pierwszą rundę
-            for(i = 0; i<currentRoundMatchIds.Count(); i++)
+            Debug.WriteLine("liczebność użytkowników podana do SaveTournament -> " + usersToAdd.Count());
+            for (i = 0; i<currentRoundMatchIds.Count(); i++)
             {
-                ServerComm.ServerCall("em:" + currentRoundMatchIds[i] + ":" + idHolder + ":" + usersToAdd[i] + ":" + usersToAdd[2*i] + ":empty:empty:empty");
+                ServerComm.ServerCall("em:" + currentRoundMatchIds[i] + ":" + usersToAdd[i].ToString() + ":" + usersToAdd[usersToAdd.Count() - i - 1] + ":empty:empty:empty");
             }
 
             // pętla dopisująca resztę meczy i łącząca kolejne rundy
             while(currentRoundMatchIds.Count() != 1)
             {
-                for(j = 0; j<currentRoundMatchIds.Count()/2; j++)
+                for(i = 0; i<currentRoundMatchIds.Count()/2; i++)
                 {
                     matchIdHolder = ServerComm.ServerCall("cm:" + idHolder)[1];
-                    ServerComm.ServerCall("em:" + currentRoundMatchIds[j] + ":empty:empty:empty:empty:" + matchIdHolder);
-                    ServerComm.ServerCall("em:" + currentRoundMatchIds[currentRoundMatchIds.Count() - j] + ":empty:empty:empty:empty:" + matchIdHolder);
+                    ServerComm.ServerCall("em:" + currentRoundMatchIds[i] + ":empty:empty:empty:empty:" + matchIdHolder);
+                    ServerComm.ServerCall("em:" + currentRoundMatchIds[currentRoundMatchIds.Count() - i - 1] + ":empty:empty:empty:empty:" + matchIdHolder);
                     nextRoundMatchIds.Add(matchIdHolder);
                 }
                 currentRoundMatchIds.Clear();
                 currentRoundMatchIds = nextRoundMatchIds;
             }
-
-            // finał
-            // matchIdHolder = ServerComm.ServerCall("cm:" + idHolder)[1];
-            // ServerComm.ServerCall("em:" + currentRoundMatchIds[0] + ":empty:empty:empty:empty:" + matchIdHolder);
-            // ServerComm.ServerCall("em:" + currentRoundMatchIds[1] + ":empty:empty:empty:empty:" + matchIdHolder);
-
         }
 
         private void CheckRounds(object sender, RoutedEventArgs e)
