@@ -243,6 +243,12 @@ namespace ELeagues
                 }
                 currentRoundMatchIds = nextRoundMatchIds;
             }
+
+            // finał
+            matchIdHolder = ServerComm.ServerCall("cm:" + idHolder)[1];
+            ServerComm.ServerCall("em:" + currentRoundMatchIds[0] + ":empty:empty:empty:empty:" + matchIdHolder);
+            ServerComm.ServerCall("em:" + currentRoundMatchIds[1] + ":empty:empty:empty:empty:" + matchIdHolder);
+
         }
 
         private void CheckRounds(object sender, RoutedEventArgs e)

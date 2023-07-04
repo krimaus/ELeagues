@@ -37,6 +37,7 @@ namespace ELeagues
                         ServerComm.CurrentUser = user;
                         if (ServerComm.ServerCall("sq:isadmin:" + user)[1].Equals("approved")) ServerComm.AdminStatus = true;
                         this.NavigationService.Navigate(new UserPage());
+                        MessageBox.Show(ServerComm.AdminStatus.ToString());
                     }
                     else MessageBox.Show("Błąd, sprawdź dane i spróbuj ponownie");
                 }
