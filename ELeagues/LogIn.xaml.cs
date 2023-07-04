@@ -32,10 +32,10 @@ namespace ELeagues
                 if (Check(user, pass))
                 {
                     //komunikacja z serwerem
-                    if (ServerComm.ServerCall("sq:logincheck:" + user + ":" + pass)[1] == "approved")
+                    if (ServerComm.ServerCall("sq:logincheck:" + user + ":" + pass)[1].Equals("approved"))
                     {
                         ServerComm.CurrentUser = user;
-                        if (ServerComm.ServerCall("sq:isadmin:" + user)[1] == "approved") ServerComm.AdminStatus = true;
+                        if (ServerComm.ServerCall("sq:isadmin:" + user)[1].Equals("approved")) ServerComm.AdminStatus = true;
                         this.NavigationService.Navigate(new UserPage());
                     }
                     else MessageBox.Show("Błąd, sprawdź dane i spróbuj ponownie");

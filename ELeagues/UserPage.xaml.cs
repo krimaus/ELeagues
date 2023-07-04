@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -192,8 +193,10 @@ namespace ELeagues
         {
             //zapytania do bazy do tworzenia turnieju i przypisania do tego turnieju uzytkownikow z usersToAdd,
             //najlepiej z wykorzystaniem petli for each
-            int i;
-            string idHolder;
+            int i,j;
+            string idHolder, matchIdHolder;
+            List<string> currentRoundMatchIds = new(), nextRoundMatchIds = new();
+
             if (add_league.IsChecked == true)
             {
                 //tworzy najpierw nowa lige, po tym tworzy turniej podpiety pod nowa lige
@@ -202,15 +205,22 @@ namespace ELeagues
             }
             else
             {
-                //tworzy turniej pod ostatnia lige
-                idHolder = ServerComm.ServerCall(
-                    "ct:" + ServerComm.ServerCall("sq:lastusedleague:" + ServerComm.CurrentUser)[1]
-                    )[1];
+                //tworzy turniej pod ostatnia lige chyba że taka nie istnieje
+                var leagueReply = ServerComm.ServerCall("sq:lastusedleague:" + ServerComm.CurrentUser);
+                if (!leagueReply[1].Equals("disapproved"))
+                {
+                    idHolder = ServerComm.ServerCall("ct:" + leagueReply[1])[1];
+                }
+                else
+                {
+                    idHolder = ServerComm.ServerCall("cl:" + ServerComm.CurrentUser)[1];
+                    idHolder = ServerComm.ServerCall("ct:" + idHolder)[1];
+                }
+                
             }
 
             // petla tworząca mecze pierwszej rundy
-            List<string> currentRoundMatchIds = new();
-            for(i = 0; i<usersToAdd.Count(); i+=2)
+            for(i = 0; i<usersToAdd.Count()/2; i++)
             {
                 currentRoundMatchIds.Add(ServerComm.ServerCall("cm:" + idHolder)[1]);
             }
@@ -222,23 +232,17 @@ namespace ELeagues
             }
 
             // pętla dopisująca resztę meczy i łącząca kolejne rundy
-            List<string> nextRoundMatchIds = new();
-            string matchIdHolder;
-            while (currentRoundMatchIds.Count() > 1)
+            for(i = currentRoundMatchIds.Count(); i>1; i/=2)
             {
-                int guardian = (currentRoundMatchIds.Count() % 2 == 0) ? currentRoundMatchIds.Count() : currentRoundMatchIds.Count() + 1;
-                //pętla tworząca połowę ilości meczy z poprzedniej rundy i przypisująca im po dwa mecze z poprzedniej rundy
-                for (i = 0; i < guardian/2; i++)
+                for(j = 0; j<i; j++)
                 {
                     matchIdHolder = ServerComm.ServerCall("cm:" + idHolder)[1];
+                    ServerComm.ServerCall("em:" + currentRoundMatchIds[j] + ":empty:empty:empty:empty:" + matchIdHolder);
+                    ServerComm.ServerCall("em:" + currentRoundMatchIds[j+1] + ":empty:empty:empty:empty:" + matchIdHolder);
                     nextRoundMatchIds.Add(matchIdHolder);
-                    ServerComm.ServerCall("em:" + currentRoundMatchIds[i] + ":" + idHolder + ":empty:empty:empty:empty:" + matchIdHolder);
-                    if(i!=0 || currentRoundMatchIds.Count() % 2 == 0) ServerComm.ServerCall("em:" + currentRoundMatchIds[guardian - i] + ":" + idHolder + ":empty:empty:empty:empty:" + matchIdHolder);
                 }
-
                 currentRoundMatchIds = nextRoundMatchIds;
             }
-            
         }
 
         private void CheckRounds(object sender, RoutedEventArgs e)

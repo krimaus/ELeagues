@@ -75,7 +75,7 @@ namespace ELeagues
                     // cm - create match
                     // em - edit match
                     // sq - server query
-                    byte[] messageSent = Encoding.ASCII.GetBytes(messageToServer + "<EOF>");
+                    byte[] messageSent = Encoding.ASCII.GetBytes(messageToServer + ":<EOF>");
                     int byteSent = sender.Send(messageSent);
 
                     // Data buffer

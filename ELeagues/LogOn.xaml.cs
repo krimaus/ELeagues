@@ -28,14 +28,14 @@ namespace ELeagues
             string email = "";
             string password = "";
             string sec_password = "";
-            bool toAdmin = false;
+            string toAdmin = "false";
 
             try
             {
                 email = e_mail.Text.ToString();
                 password = pass.Text.ToString();
                 sec_password = sec_pass.Text.ToString();
-                if (czy_admin.IsChecked == true) toAdmin = true;
+                if (czy_admin.IsChecked == true) toAdmin = "true";
 
                 if (Check(email, password, sec_password))
                 {
