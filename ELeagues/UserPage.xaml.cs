@@ -186,6 +186,7 @@ namespace ELeagues
         {
             //zapytania do bazy do tworzenia turnieju i przypisania do tego turnieju uzytkownikow z usersToAdd,
             //najlepiej z wykorzystaniem petli for each
+            int i;
             string idHolder;
             if (add_league.IsChecked == true)
             {
@@ -203,14 +204,35 @@ namespace ELeagues
 
             // petla tworząca mecze pierwszej rundy
             List<string> currentRoundMatchIds = new();
-            for(int i = 0; i<usersToAdd.Count(); i+=2)
+            for(i = 0; i<usersToAdd.Count(); i+=2)
             {
                 currentRoundMatchIds.Add(ServerComm.ServerCall("cm:" + idHolder)[1]);
             }
 
             // pętla wypełniająca pierwszą rundę
+            for(i = 0; i<currentRoundMatchIds.Count(); i++)
+            {
+                ServerComm.ServerCall("em:" + currentRoundMatchIds[i] + ":" + idHolder + ":" + usersToAdd[i] + ":" + usersToAdd[2*i] + ":empty:empty:empty");
+            }
 
             // pętla dopisująca resztę meczy i łącząca kolejne rundy
+            List<string> nextRoundMatchIds = new();
+            string matchIdHolder;
+            while (currentRoundMatchIds.Count() > 1)
+            {
+                int guardian = (currentRoundMatchIds.Count() % 2 == 0) ? currentRoundMatchIds.Count() : currentRoundMatchIds.Count() + 1;
+                //pętla tworząca połowę ilości meczy z poprzedniej rundy i przypisująca im po dwa mecze z poprzedniej rundy
+                for (i = 0; i < guardian/2; i++)
+                {
+                    matchIdHolder = ServerComm.ServerCall("cm:" + idHolder)[1];
+                    nextRoundMatchIds.Add(matchIdHolder);
+                    ServerComm.ServerCall("em:" + currentRoundMatchIds[i] + ":" + idHolder + ":empty:empty:empty:empty:" + matchIdHolder);
+                    if(i!=0 || currentRoundMatchIds.Count() % 2 == 0) ServerComm.ServerCall("em:" + currentRoundMatchIds[guardian - i] + ":" + idHolder + ":empty:empty:empty:empty:" + matchIdHolder);
+                }
+
+                currentRoundMatchIds = nextRoundMatchIds;
+            }
+            
         }
 
         private void CheckRounds(object sender, RoutedEventArgs e)
