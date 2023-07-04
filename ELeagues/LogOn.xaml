@@ -18,7 +18,7 @@
         <TextBox Name="sec_pass" HorizontalAlignment="Left" FontFamily="Georgia" Margin="336,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderBrush="#FFA3AEC2" Background="#FF31353C" Foreground="White" FontSize="16"/>
         <Button Click="save" Content="Zarejestruj" HorizontalAlignment="Left" Margin="328,274,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.621,-0.661" Height="40" Width="136" Background="#FF31353C" BorderBrush="#FF31353C" Foreground="White"/>
         <CheckBox x:Name="czy_admin"  Content="Chcę zostać adminem" HorizontalAlignment="Left" Margin="336,254,0,0" VerticalAlignment="Top" Foreground="white"/>
-        <TextBlock Foreground="white"  HorizontalAlignment="Left" Margin="476,117,0,0" TextWrapping="Wrap" Text="Nazwa użytkownika i hasło nie mogą zaiwerać dukropka ':'. Hasło musi zawierać przynajmniej jedną wielką literę oraz składać się z 8 znaków"  VerticalAlignment="Top" Height="130" Width="166"/>
+        <TextBlock Foreground="white"  HorizontalAlignment="Left" Margin="476,117,0,0" TextWrapping="Wrap" Text="Nazwa użytkownika i hasło nie mogą zaiwerać dwukropka ':'. Hasło musi zawierać przynajmniej jedną wielką literę oraz składać się z 8 znaków"  VerticalAlignment="Top" Height="130" Width="166"/>
 
     </Grid>
 </Page>

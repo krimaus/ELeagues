@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -42,7 +43,7 @@ namespace ELeagues
         {
             ServerComm.AdminStatus = false;
             string helloMsg = "Witaj, " + ServerComm.CurrentUser + "\n" + "Turnieje do których jesteś zapisany/a:\n"; // + \n +"Najblizsze turnieje na ktore jestes zapisany: "
-            // info na jakie jest zapisane turnieje\n
+            // info na jakie jest zapisane turnieje 
             foreach (string turneyName in ServerComm.ServerCall("sq:mytourneys:"+ServerComm.CurrentUser))
             {
                 if (turneyName != "sr") helloMsg += turneyName + "\n";
@@ -153,12 +154,18 @@ namespace ELeagues
             
             if (IsNumber(score1.Text.ToString()) && IsNumber(score2.Text.ToString()) && IsNumber((m_id.Text.ToString())))
             {
-                int s1 = int.Parse(score1.Text.ToString()), s2 = int.Parse(score2.Text.ToString());
-                int id = int.Parse(m_id.Text.ToString());
+                string s1 = score1.Text.ToString(), s2 = score2.Text.ToString();
+                string id = m_id.Text.ToString();
+                if (g1 == "") g1 = "empty";
+                if (g2 == "") g2 = "empty";
+                if (s1 == "") s1 = "empty";
+                if (s2 == "") s2 = "empty";
+
 
                 if (g1 != "" && g2 != "" && g1 != g2)
                 {
                     //zapytanie edytujace dany mecz o danym id
+                    ServerComm.ServerCall("em:" + id.ToString() + ":" + g1 + ":" + g2 + ":" + s1 + ":" + s2 + ":empty");
                     gamer1.Text = "";
                     gamer2.Text = "";
                     score1.Text = "";
@@ -192,13 +199,55 @@ namespace ELeagues
         {
             //zapytania do bazy do tworzenia turnieju i przypisania do tego turnieju uzytkownikow z usersToAdd,
             //najlepiej z wykorzystaniem petli for each
+            int i,j;
+            string idHolder, matchIdHolder;
+            List<string> currentRoundMatchIds = new(), nextRoundMatchIds = new();
+
             if (add_league.IsChecked == true)
             {
                 //tworzy najpierw nowa lige, po tym tworzy turniej podpiety pod nowa lige
+                idHolder = ServerComm.ServerCall("cl:" + ServerComm.CurrentUser)[1];
+                idHolder = ServerComm.ServerCall("ct:" + idHolder)[1];
             }
             else
             {
-                //tworzy turniej pod ostatnia lige
+                //tworzy turniej pod ostatnia lige chyba że taka nie istnieje
+                var leagueReply = ServerComm.ServerCall("sq:lastusedleague:" + ServerComm.CurrentUser);
+                if (!leagueReply[1].Equals("disapproved"))
+                {
+                    idHolder = ServerComm.ServerCall("ct:" + leagueReply[1])[1];
+                }
+                else
+                {
+                    idHolder = ServerComm.ServerCall("cl:" + ServerComm.CurrentUser)[1];
+                    idHolder = ServerComm.ServerCall("ct:" + idHolder)[1];
+                }
+                
+            }
+
+            // petla tworząca mecze pierwszej rundy
+            for(i = 0; i<usersToAdd.Count()/2; i++)
+            {
+                currentRoundMatchIds.Add(ServerComm.ServerCall("cm:" + idHolder)[1]);
+            }
+
+            // pętla wypełniająca pierwszą rundę
+            for(i = 0; i<currentRoundMatchIds.Count(); i++)
+            {
+                ServerComm.ServerCall("em:" + currentRoundMatchIds[i] + ":" + idHolder + ":" + usersToAdd[i] + ":" + usersToAdd[2*i] + ":empty:empty:empty");
+            }
+
+            // pętla dopisująca resztę meczy i łącząca kolejne rundy
+            for(i = currentRoundMatchIds.Count(); i>1; i/=2)
+            {
+                for(j = 0; j<i; j++)
+                {
+                    matchIdHolder = ServerComm.ServerCall("cm:" + idHolder)[1];
+                    ServerComm.ServerCall("em:" + currentRoundMatchIds[j] + ":empty:empty:empty:empty:" + matchIdHolder);
+                    ServerComm.ServerCall("em:" + currentRoundMatchIds[j+1] + ":empty:empty:empty:empty:" + matchIdHolder);
+                    nextRoundMatchIds.Add(matchIdHolder);
+                }
+                currentRoundMatchIds = nextRoundMatchIds;
             }
         }
 

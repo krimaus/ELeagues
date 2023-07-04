@@ -28,20 +28,18 @@ namespace ELeagues
             string email = "";
             string password = "";
             string sec_password = "";
-            bool toAdmin = false;
-            string[] serverDenial = { "sr", "disapproved" };
+            string toAdmin = "false";
 
             try
             {
                 email = e_mail.Text.ToString();
                 password = pass.Text.ToString();
                 sec_password = sec_pass.Text.ToString();
-                if (czy_admin.IsChecked == true) toAdmin = true;
+                if (czy_admin.IsChecked == true) toAdmin = "true";
 
                 if (Check(email, password, sec_password))
                 {
-                    //potrzeba czegoś do ustalenia czy tworzone konto jest adminem
-                    if (ServerComm.ServerCall("ca:" + email + ":" + password + ":" + "false") == serverDenial)
+                    if (ServerComm.ServerCall("ca:" + email + ":" + password + ":" + toAdmin)[1] == "disapproved")
                         MessageBox.Show("Błąd, sprawdź dane i spróbuj poniwnie");
                     else
                         MessageBox.Show("Pomyślnie utworzono konto");
