@@ -46,6 +46,8 @@ namespace ELeagues
             var reply = ServerComm.ServerCall("sq:myinfo:" + ServerComm.CurrentUser);
             for (i = 0; i < reply.Count() - 1; i++)
             {
+                if (reply[i] == "sr" || reply[i] == "disapproved") break;
+
                 if (i % 3 == 0) helloMsg += "ID ligi: ";
                 else if (i % 3 == 1) helloMsg += "ID turnieju: ";
                 else helloMsg += "ID meczu: ";
@@ -259,7 +261,6 @@ namespace ELeagues
                 currentRoundMatchIds = nextRoundMatchIds;
             }
 
-            //save_button.Visibility = Visibility.Hidden;
             usersToAdd.Clear();
         }
 
@@ -278,10 +279,11 @@ namespace ELeagues
             playersInList = 1;
             playersQuantity = 1;
             int rounds;
-            //string r = "";
+            string r = "";
             try
             {
-                rounds = int.Parse(iloscRund.Text.ToString());
+                r = iloscRund.Text.ToString();
+                rounds = int.Parse(r);
 
                 if (rounds <= 6)
                 {
