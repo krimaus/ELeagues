@@ -30,7 +30,6 @@ namespace ELeagues
         private List<string> usersToAdd = new List<string>();
 
         
-
         private void Back(object sender, RoutedEventArgs e) // wylogowanie
         {
             ServerComm.CurrentUser = null;
@@ -259,6 +258,9 @@ namespace ELeagues
                 currentRoundMatchIds.Clear();
                 currentRoundMatchIds = nextRoundMatchIds;
             }
+
+            //save_button.Visibility = Visibility.Hidden;
+            usersToAdd.Clear();
         }
 
         private void CreateUsersList(int r)
