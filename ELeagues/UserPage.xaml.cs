@@ -144,13 +144,6 @@ namespace ELeagues
             return ok;
         }
 
-        private bool IsPowerOfTwo_2(int number)
-        {
-            double log = Math.Log(number, 2);
-            double pow = Math.Pow(2, Math.Round(log));
-            return pow == number;
-        }
-
         private void EditMatch(object sender, RoutedEventArgs e)
         {
             string g1 = gamer1.Text.ToString(), g2 = gamer2.Text.ToString();
@@ -256,6 +249,15 @@ namespace ELeagues
             }
         }
 
+        private void CreateUsersList(int r)
+        {
+            for (int i = 1; i < r; i++)
+            {
+                playersQuantity *= i;
+                playersInList *= i;
+            }
+        }
+
         private void CheckRounds(object sender, RoutedEventArgs e)
         {
             int rounds;
@@ -264,10 +266,9 @@ namespace ELeagues
             {
                 rounds = int.Parse(iloscRund.Text.ToString());
 
-                if (IsPowerOfTwo_2(rounds))
+                if (rounds <= 6)
                 {
-                    playersQuantity = 2 * rounds;
-                    playersInList = 2 * rounds;
+                    CreateUsersList(rounds);
                 }
                 else
                 {
