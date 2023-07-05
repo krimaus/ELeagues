@@ -41,7 +41,7 @@ namespace ELeagues
 
         private void CheckLogged(object sender, RoutedEventArgs e)
         {
-            string helloMsg = "Witaj, " + ServerComm.CurrentUser + "\n" + "Turnieje do których jesteś zapisany/a:\n"; // + \n +"Najblizsze turnieje na ktore jestes zapisany: "
+            string helloMsg = "Witaj, " + ServerComm.CurrentUser + "\n" + "ID turniejów do których jesteś zapisany/a:\n"; // + \n +"Najblizsze turnieje na ktore jestes zapisany: "
             // info na jakie jest zapisane turnieje 
             foreach (string turneyName in ServerComm.ServerCall("sq:mytourneys:"+ServerComm.CurrentUser))
             {
@@ -129,8 +129,16 @@ namespace ELeagues
 
         private void ShowMyTournaments(object sender, RoutedEventArgs e)
         {
-            string query = ""; 
+            string query = "";
+            int i = 0;
             //select na turnieje danego gracza, tak zeby bylo widac w tym id ligi i id meczow, posortowane wzgledem id turnieju
+            var reply = ServerComm.ServerCall("sq:myinfo:"+ServerComm.CurrentUser);
+            foreach( var part in reply)
+            {
+                query += part + " ";
+                if (i+1 % 3 == 0) query += "\n";
+                i++;
+            }
             CreateContent(query);
         }
 
