@@ -15,14 +15,8 @@
                 <navigation:NavButton Text="Logowanie" Foreground="White" FontFamily="Georgia" FontSize="16" NavUri="LogIn.xaml"/>
                 <navigation:NavButton Text="Rejestracja" Foreground="White" FontFamily="Georgia" FontSize="16" NavUri="LogOn.xaml"/>
                 <navigation:NavButton Text="O nas" Foreground="White" FontFamily="Georgia" FontSize="16" NavUri="AboutUsPage.xaml"/>
-                <navigation:NavButton Text="Wyjście" Foreground="White" FontFamily="Georgia" FontSize="16"/>
             </WrapPanel>
 
-            <!--
-            <Button x:Name="btn2" Click="click_btn2" MouseEnter="Focus2" MouseLeave="Blur2" Content="Rejestracja" HorizontalAlignment="Center" VerticalAlignment="Center" Height="41" Width="140" Background="#FF31353C" BorderBrush="#FFA3AEC2" Foreground="White" FontSize="16" FontFamily="Georgia" />
-            <Button x:Name="btn3" MouseEnter="Focus3" MouseLeave="Blur3" Content="O nas" HorizontalAlignment="Center" Margin="0,218,0,0" VerticalAlignment="Top" Height="41" Width="140" Background="#FF31353C" BorderBrush="#FFA3AEC2" Foreground="White" FontSize="16" FontFamily="Georgia" />
-            <Button x:Name="btn4" MouseEnter="Focus4" MouseLeave="Blur4" Content="Wyjście" HorizontalAlignment="Center" Margin="0,264,0,0" VerticalAlignment="Top" Height="41" Width="140" Background="#FF31353C" BorderBrush="#FFA3AEC2" Foreground="White" FontSize="16" FontFamily="Georgia" />
-            -->
 
         </Grid>
     </DockPanel>

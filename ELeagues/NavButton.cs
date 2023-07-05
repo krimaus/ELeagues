@@ -59,6 +59,15 @@ namespace ELeagues
         public static readonly DependencyProperty NavUriProperty =
             DependencyProperty.Register("NavUri", typeof(Uri), typeof(NavButton), new PropertyMetadata(null));
 
+        public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
+        "Click", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NavButton));
+
+        public event RoutedEventHandler Click
+        {
+            add { AddHandler(ClickEvent, value); }
+            remove { RemoveHandler(ClickEvent, value); }
+        }
+
         public string Text
         {
             get 

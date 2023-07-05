@@ -274,6 +274,9 @@ namespace ELeagues
 
         private void CheckRounds(object sender, RoutedEventArgs e)
         {
+            usersToAdd.Clear();
+            playersInList = 1;
+            playersQuantity = 1;
             int rounds;
             //string r = "";
             try
@@ -283,10 +286,10 @@ namespace ELeagues
                 if (rounds <= 6)
                 {
                     CreateUsersList(rounds);
+
                 }
                 else
                 {
-                    MessageBox.Show("Ilosc rund powinna byc parzysta, spróbuj ponownie");
                     iloscRund.Text = "2";
                 }
             }

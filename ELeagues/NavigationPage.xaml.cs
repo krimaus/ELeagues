@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,5 +31,8 @@ namespace ELeagues
             var ClickedBtn = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedBtn.NavUri);
         }
+
+        
+
     }
 }
