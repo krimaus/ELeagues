@@ -25,15 +25,14 @@ namespace ELeagues
     /// </summary>
     public partial class UserPage : Page
     {
-        private int playersQuantity = 0;
-        private int playersInList = 0;
+        private int playersQuantity = 1;
+        private int playersInList = 1;
         private List<string> usersToAdd = new List<string>();
 
         
 
-        private void Back(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e) // wylogowanie
         {
-            // wylogowanie
             ServerComm.CurrentUser = null;
             ServerComm.AdminStatus = false;
             this.NavigationService.Navigate(new NavigationPage());
@@ -41,21 +40,30 @@ namespace ELeagues
 
         private void CheckLogged(object sender, RoutedEventArgs e)
         {
-            string helloMsg = "Witaj, " + ServerComm.CurrentUser + "\n" + "Turnieje do których jesteś zapisany/a:\n"; // + \n +"Najblizsze turnieje na ktore jestes zapisany: "
-            // info na jakie jest zapisane turnieje 
-            foreach (string turneyName in ServerComm.ServerCall("sq:mytourneys:"+ServerComm.CurrentUser))
+            string helloMsg = "Witaj, " + ServerComm.CurrentUser + "\n" + "Mecze do których jesteś zapisany/a:\n"; // + \n +"Najblizsze turnieje na ktore jestes zapisany: "
+            
+            int i = 0;
+            //select na turnieje danego gracza, tak zeby bylo widac w tym id ligi i id meczow, posortowane wzgledem id turnieju
+            var reply = ServerComm.ServerCall("sq:myinfo:" + ServerComm.CurrentUser);
+            for (i = 0; i < reply.Count() - 1; i++)
             {
-                if (turneyName != "sr" && turneyName != "disapproved") helloMsg += turneyName + "\n";
+                if (i % 3 == 0) helloMsg += "ID ligi: ";
+                else if (i % 3 == 1) helloMsg += "ID turnieju: ";
+                else helloMsg += "ID meczu: ";
+
+                helloMsg += reply[i] + ", ";
+
+                if (i % 3 == 2) helloMsg += "\n";
             }
 
             string turniejeAll = ""; 
             //select na wszystkie turnieje, postaram sie zrobic z tego przewijalna tabele
             foreach(string turneyName in ServerComm.ServerCall("sq:alltourneys"))
             {
-                if (turneyName != "sr" && turneyName != "disapproved") turniejeAll += turneyName + "\n";
+                if (turneyName != "sr" && turneyName != "disapproved" && turneyName != "") turniejeAll += "ID: " + turneyName + "\n";
             }
             
-            hello_user.Content = helloMsg + "\n" + turniejeAll;
+            hello_user.Content = helloMsg + "\nWszystkie dostępne turnieje:\n" + turniejeAll;
 
             
             if (ServerComm.AdminStatus)
@@ -129,8 +137,12 @@ namespace ELeagues
 
         private void ShowMyTournaments(object sender, RoutedEventArgs e)
         {
-            string query = ""; 
-            //select na turnieje danego gracza, tak zeby bylo widac w tym id ligi i id meczow, posortowane wzgledem id turnieju
+            // turnieje stworzone przez użytkownika 
+            string query = "ID twoich turniejów:\n";
+            foreach (string turneyName in ServerComm.ServerCall("sq:mytourneys:" + ServerComm.CurrentUser))
+            {
+                if (turneyName != "sr" && turneyName != "disapproved" && turneyName != "") query += "ID: " + turneyName + "\n";
+            }
             CreateContent(query);
         }
 
@@ -190,7 +202,7 @@ namespace ELeagues
         {
             edit_btns.Visibility = Visibility.Visible;
         }
-
+        
         private void SaveTournament(object sender, RoutedEventArgs e)
         {
             //zapytania do bazy do tworzenia turnieju i przypisania do tego turnieju uzytkownikow z usersToAdd,
@@ -251,10 +263,10 @@ namespace ELeagues
 
         private void CreateUsersList(int r)
         {
-            for (int i = 1; i < r; i++)
+            for (int i = 1; i <= r; i++)
             {
-                playersQuantity *= i;
-                playersInList *= i;
+                playersQuantity *= 2;
+                playersInList *= 2;
             }
         }
 

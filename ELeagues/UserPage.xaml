@@ -31,7 +31,7 @@
             </TabItem>
             <TabItem Header="Edytuj mecze" x:Name="editMatch" Height="20" VerticalAlignment="Top">
                 <StackPanel Background="#FF31353C"  Margin="-2,-2,-2,-2">
-                    <Button Click="ShowMyTournaments"  x:Name="turnieje_ligi" Content="Pokaż moje turnieje" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
+                    <Button Click="ShowMyTournaments"  x:Name="turnieje_ligi" Content="Pokaż moje turnieje" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50" Width="793"/>
                     <Label Content="Wpisz id meczu do edycji" Foreground="white" FontSize="14" Width="193"/>
                     <TextBox TextChanged="ShowButtonM"  x:Name="m_id"  Width="100"/>
                     <Button Visibility="Hidden" x:Name="edit_btns"  Click="ShowEditButtons" Content="Rozpocznij edycję" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
