@@ -40,6 +40,7 @@ namespace ELeagues
 
         private void CheckLogged(object sender, RoutedEventArgs e)
         {
+            ServerComm.AdminStatus = true;
             string helloMsg = "Witaj, " + ServerComm.CurrentUser + "\n" + "Mecze do których jesteś zapisany/a:\n"; // + \n +"Najblizsze turnieje na ktore jestes zapisany: "
             
             int i = 0;
@@ -259,6 +260,12 @@ namespace ELeagues
                 currentRoundMatchIds.Clear();
                 currentRoundMatchIds = nextRoundMatchIds;
             }
+            usersToAdd.Clear();
+            playersInList = 1;
+            playersInList = 1;
+
+            save_button.Visibility = Visibility.Hidden;
+            add_league.Visibility = Visibility.Hidden;
         }
 
         private void CreateUsersList(int r)
@@ -276,10 +283,11 @@ namespace ELeagues
             playersInList = 1;
             playersQuantity = 1;
             int rounds;
-            //string r = "";
+            string r = "";
             try
             {
-                rounds = int.Parse(iloscRund.Text.ToString());
+                r = iloscRund.Text.ToString();
+                rounds = int.Parse(r);
 
                 if (rounds <= 6)
                 {
