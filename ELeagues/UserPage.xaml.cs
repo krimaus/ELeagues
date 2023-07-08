@@ -30,7 +30,6 @@ namespace ELeagues
         private List<string> usersToAdd = new List<string>();
 
         
-
         private void Back(object sender, RoutedEventArgs e) // wylogowanie
         {
             ServerComm.CurrentUser = null;
@@ -48,6 +47,8 @@ namespace ELeagues
             var reply = ServerComm.ServerCall("sq:myinfo:" + ServerComm.CurrentUser);
             for (i = 0; i < reply.Count() - 1; i++)
             {
+                if (reply[i] == "sr" || reply[i] == "disapproved") break;
+
                 if (i % 3 == 0) helloMsg += "ID ligi: ";
                 else if (i % 3 == 1) helloMsg += "ID turnieju: ";
                 else helloMsg += "ID meczu: ";
