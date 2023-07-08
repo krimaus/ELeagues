@@ -49,6 +49,13 @@
                     <Button Visibility="Hidden" x:Name="edit"  Click="EditMatch" Content="Edytuj" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
                 </StackPanel>
             </TabItem>
+            <TabItem Header="Usuń mecze" x:Name="deleteMatch" Height="20" VerticalAlignment="Top">
+                <StackPanel Background="#FF31353C"  Margin="-2,-2,-2,-2">
+                    <Label x:Name="match_to_del" Content="Podaj ID meczu do usunięcia" Foreground="white" FontSize="14" Width="193"/>
+                    <TextBox TextChanged="ShowDelBtn" x:Name="to_del"  Width="100"/>
+                    <Button Visibility="Hidden" x:Name="del"  Click="DeleteMatch" Content="Usuń" Background="#FF31353C" Foreground="White" BorderBrush="#FF31353C" Height="50"/>
+                </StackPanel>
+            </TabItem>
         </TabControl>
         <Button Content="Button" HorizontalAlignment="Left" Margin="1130,350,0,0" VerticalAlignment="Top" Width="0"/>
 

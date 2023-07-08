@@ -73,10 +73,12 @@ namespace ELeagues
                 //jezeli admin
                 turnieje.Visibility = Visibility.Visible;
                 editMatch.Visibility = Visibility.Visible;
+                deleteMatch.Visibility = Visibility.Visible;
             }
             else
             {
                 //jezeli zwykly user
+                deleteMatch.Visibility = Visibility.Hidden;
                 turnieje.Visibility = Visibility.Hidden;
                 editMatch.Visibility = Visibility.Hidden;
             }
@@ -304,6 +306,29 @@ namespace ELeagues
             {
                 MessageBox.Show("Coś poszło nie tak, rundy");
             }
+        }
+
+        private void DeleteMatch(object sender, RoutedEventArgs e)
+        {
+            int id_to_del = int.Parse(to_del.Text.ToString());
+            //if() jezeli istnieje taki turniej o takim ID, to usun
+            //else
+            //{
+            //  MessageBox.Show("Proszę podać poprawne ID");    
+            //}
+        }
+
+        private void ShowDelBtn(object sender, RoutedEventArgs e)
+        {
+            if (IsNumber(to_del.Text.ToString()))
+            {
+                del.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Proszę podać poprawne ID");
+            }
+            
         }
 
         public UserPage()
