@@ -310,12 +310,17 @@ namespace ELeagues
 
         private void DeleteMatch(object sender, RoutedEventArgs e)
         {
-            int id_to_del = int.Parse(to_del.Text.ToString());
-            //if() jezeli istnieje taki turniej o takim ID, to usun
-            //else
-            //{
-            //  MessageBox.Show("Proszę podać poprawne ID");    
-            //}
+            string temp = to_del.Text.ToString();
+            int id_to_del = int.Parse(temp);
+            temp = ServerComm.ServerCall("sq:tournamentexist:" + id_to_del)[1];
+            if (temp == "approved") //jezeli istnieje taki turniej o takim ID, to usun
+            {
+                ServerComm.ServerCall("dt:" + id_to_del);
+            }
+            else
+            {
+              MessageBox.Show("Proszę podać poprawne ID");    
+            }
         }
 
         private void ShowDelBtn(object sender, RoutedEventArgs e)
